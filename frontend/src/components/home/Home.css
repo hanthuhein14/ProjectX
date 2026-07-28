@@ -1,0 +1,32 @@
+.homebar {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 150px;
+}
+
+
+.H1 {
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.H2 {
+    font-size: 35px;
+    font-weight: 500;
+}
+
+
+.cursor {
+    color: #2563eb;
+    font-weight: bold;
+    animation: blink 0.7s infinite;
+}
+
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
