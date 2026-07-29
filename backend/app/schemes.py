@@ -4,9 +4,11 @@ from typing import Optional
 
 class UserOut(BaseModel):
     id:int
+    username:str
     email: EmailStr
 
 class UserCreate(BaseModel):
+    username:str
     email: EmailStr
     password:str
 
@@ -15,3 +17,11 @@ class UserCreate(BaseModel):
 class UserLogin(BaseModel):
     email: EmailStr
     password:str
+
+
+
+
+class Token(BaseModel):
+    access_token:str
+    token_type:str
+

@@ -1,10 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Loginpopup.css'
+import {useNavigate} from 'react-router-dom'
+import api from "../../api/axios";
 
 const Loginpopup = ({ setShowLogin,setShowSignup }) => {
+  const navigate=useNavigate();
+
+  const [email,setEmail]=useState("");
+  const[password,setPassword]=useState("");
+
+  const handleLogin=async(e)=>{
+    e.preventDefault();
+    try{
+      const response=await api.post("/login",{
+        email:email,
+        password,password
+      });
+      localStorage.setItem(
+        "token",
+        response.data.access_token
+      );
+      setShowLogin(false);
+      navigate("/dashboard");
+    }
+    catch(error){
+      console.log(error);
+      alert("Invalid email or password");
+    }
+  };
   return (
     <div className='login-popup'>
-      <form className='login-popup-container'>
+      <form className='login-popup-container' onSubmit={handleLogin}>
 
         <div className="login-popup-title">
           <h2>Login</h2>
@@ -21,12 +47,14 @@ const Loginpopup = ({ setShowLogin,setShowSignup }) => {
             type="email" 
             placeholder="Enter your email"
             required
+            value={email} onChange={(e)=>setEmail(e.target.value)}
           />
 
           <input 
             type="password" 
             placeholder="Enter your password"
             required
+            value={password} onChange={(e)=>setPassword(e.target.value)}
           />
         </div>
 
