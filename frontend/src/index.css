@@ -10,7 +10,7 @@ a{
   color: inherit;
 }
 
-.app{
+ .landing-page{
   margin: 0;
   
   background: linear-gradient(
@@ -37,4 +37,4 @@ a{
   100% {
     background-position: 0% 50%;
   }
-}
+} 

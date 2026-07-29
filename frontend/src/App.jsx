@@ -9,50 +9,50 @@ import Dashboard from "./components/Dashboard/Dashboard.jsx";
 
 
 const App = () => {
-  const [showlogin,setShowLogin]=useState(false)
+  const [showLogin,setShowLogin]=useState(false)
   const [showSignup, setShowSignup] = useState(false)
   
   return (
     <>
-{showlogin && (
-  <Loginpopup
-    setShowLogin={setShowLogin}
-    setShowSignup={setShowSignup}
-  />
-)}
-
-{showSignup && (
-  <Signuppopup
-    setShowSignup={setShowSignup}
-    setShowLogin={setShowLogin}
-  />
-)}
-    <div className='app'>
-      
-      
-      <Routes>
   
-  <Route 
-    path="/" 
-    element={
-      <>
-        <Navbar 
+      {showLogin && (
+        <Loginpopup
           setShowLogin={setShowLogin}
           setShowSignup={setShowSignup}
         />
-        <Home />
-      </>
-    }
-  />
+      )}
   
-  <Route 
-    path="/dashboard" 
-    element={<Dashboard />}
-  />
-
-</Routes>
-    </div>
-    
+      {showSignup && (
+        <Signuppopup
+          setShowSignup={setShowSignup}
+          setShowLogin={setShowLogin}
+        />
+      )}
+  
+  
+      <Routes>
+  
+        <Route
+          path="/"
+          element={
+            <div className="landing-page">
+              <Navbar
+                setShowLogin={setShowLogin}
+                setShowSignup={setShowSignup}
+              />
+              <Home />
+            </div>
+          }
+        />
+  
+  
+        <Route
+          path="/dashboard"
+          element={<Dashboard />}
+        />
+  
+      </Routes>
+  
     </>
   )
 }
