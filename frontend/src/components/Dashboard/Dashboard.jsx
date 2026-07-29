@@ -1,15 +1,27 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 
-const Dashboard = props => {
+const Dashboard = () => {
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+
   return (
-    <div className='dashboard'>
+    <div className="dashboard">
+
       <h1>Welcome</h1>
+
+      <button onClick={logout}>
+        Logout
+      </button>
+
     </div>
   )
 }
 
-Dashboard.propTypes = {
-
-}
-
-export default Dashboard
+export default Dashboard;

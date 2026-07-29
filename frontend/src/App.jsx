@@ -6,7 +6,7 @@ import Loginpopup from './components/loginpopup/Loginpopup'
 import Signuppopup from './components/signuppopup/Signuppopup'
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
-
+import ProtectedRoute from './components/protectedroute/Protectedroute.jsx'
 
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
@@ -48,7 +48,11 @@ const App = () => {
   
         <Route
           path="/dashboard"
-          element={<Dashboard />}
+          element={
+          <ProtectedRoute>
+          <Dashboard />
+            </ProtectedRoute>
+          }
         />
   
       </Routes>

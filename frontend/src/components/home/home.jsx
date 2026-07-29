@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 
 const Home = () => {
-  const text1 = "Let's get success together.";
+  const text1 = "Let's get your goal together.";
   const text2 = "We're always by your side.";
 
   const [display1, setDisplay1] = useState("");

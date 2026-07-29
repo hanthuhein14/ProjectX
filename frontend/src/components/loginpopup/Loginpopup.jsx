@@ -14,7 +14,7 @@ const Loginpopup = ({ setShowLogin,setShowSignup }) => {
     try{
       const response=await api.post("/login",{
         email:email,
-        password,password
+        password:password
       });
       localStorage.setItem(
         "token",
