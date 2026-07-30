@@ -7,6 +7,7 @@ import Signuppopup from './components/signuppopup/Signuppopup'
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import ProtectedRoute from './components/protectedroute/Protectedroute.jsx'
+import Feature from './components/feature/Feature.jsx'
 
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
@@ -41,6 +42,7 @@ const App = () => {
                 setShowSignup={setShowSignup}
               />
               <Home />
+              <Feature/>
             </div>
           }
         />

@@ -4,25 +4,31 @@
   font-family: 'Outfit', sans-serif;
 }
 .logo{
-    height: 100px;
-    width: 100px;
-    border-radius: 70px;
+    height: 70px;
+    width: 70px;
+    border-radius: 100px;
     
 }
-.navbar{
-    align-items: center;
+.navbar {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 20px 0px;
-    margin-left: 50px;
-    margin-right: 50px;
-
+    padding: 20px 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #020024;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 51%, rgba(0, 212, 255, 1) 100%);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
 }
 .navbar-menu{
     display: flex;
     gap: 50px;
     list-style: none;
-    color:rgb(59, 59, 59);
+    color:rgb(255, 255, 255);
 }
 .navbar-right{
     display: flex;

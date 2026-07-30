@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
+import { assets } from "../../assets/assets";
 
 const Home = () => {
-  const text1 = "Let's get your goal together.";
-  const text2 = "We're always by your side.";
+  const text1 = "Your next adventure starts here.";
+  const text2 = "Explore new places, create memories, and experience the world like never before.";
 
   const [display1, setDisplay1] = useState("");
   const [display2, setDisplay2] = useState("");
@@ -56,7 +57,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="homebar">
+    <section id="home">
+    <div className="homebar" style={{
+        backgroundImage: `url(${assets.background})`
+      }}>
       <h1 className="H1">
         {display1}
         <span className="cursor">_</span>
@@ -67,6 +71,7 @@ const Home = () => {
         <span className="cursor">_</span>
       </h2>
     </div>
+    </section>
   );
 };
 

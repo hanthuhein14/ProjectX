@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import'./Navbar.css'
 import { assets } from '../../assets/assets'
+import home from '../home/home'
+import Feature from '../feature/Feature'
+
+
+
 const Navbar = ({setShowLogin,setShowSignup}) => {
     const[menu,setMenu]=useState("Home");
   return (
     <div className='navbar'>
       <img src={assets.logo} alt="" className="logo"/>
       <ul className="navbar-menu">
-        <li onClick={()=>setMenu("Home")} className={menu=="Home"?"active":""}>Home</li>
-        <li onClick={()=>setMenu("Feature")} className={menu=="Feature"?"active":""}>Feature</li>
+        <li onClick={()=>setMenu("Home")} className={menu=="Home"?"active":""}><a href="#home">Home</a></li>
+        <li onClick={()=>setMenu("Feature")} className={menu=="Feature"?"active":""}><a href="#Feature">Feature</a></li>
         <li onClick={()=>setMenu("About")} className={menu=="About"?"active":""}>About</li>
         <li onClick={()=>setMenu("Contact")} className={menu=="Contact"?"active":""}>Contact</li>
       </ul>
