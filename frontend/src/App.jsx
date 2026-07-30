@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import ProtectedRoute from './components/protectedroute/Protectedroute.jsx'
 import Feature from './components/feature/Feature.jsx'
-
+import Aboutus from './components/aboutus/aboutus.jsx'
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
   const [showSignup, setShowSignup] = useState(false)
@@ -43,6 +43,7 @@ const App = () => {
               />
               <Home />
               <Feature/>
+              <Aboutus/>
             </div>
           }
         />
