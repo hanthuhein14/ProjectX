@@ -11,3 +11,25 @@
     color: white;
     padding: 30px;
   }
+  
+.dashboardbg{
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+}
+.dashboard-overlay {
+  position:absolute;
+  inset: 0;
+
+  display: flex;
+  
+  
+
+  background: rgba(0, 0, 0, 0.25);
+}
+.logout{
+  height: 50px;
+  width: 70px;
+  border-radius: 20px;
+  cursor: pointer;
+}

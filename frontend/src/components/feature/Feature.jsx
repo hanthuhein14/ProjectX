@@ -130,7 +130,6 @@ const Feature = () => {
           />
 
         </div>
-
       </div>
 
     </section>

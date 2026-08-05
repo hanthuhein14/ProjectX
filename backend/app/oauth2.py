@@ -34,7 +34,7 @@ def verify_access_token(token:str,credentials_exception):
 
         if user_id is None:
             raise credentials_exception
-        token_data=schemes.TokenData(id=str(user_id))
+        token_data=schemes.TokenData(id=int(user_id))
     except jwt.PyJWTError:
         raise credentials_exception
     return token_data

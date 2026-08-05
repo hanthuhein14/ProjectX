@@ -2,6 +2,7 @@ from app import models, schemes, utils
 from sqlalchemy.orm import Session
 from fastapi import FastAPI ,Response,status,HTTPException,Depends,APIRouter
 from .. database import engine,get_db
+from ..oauth2 import get_current_user
 
 router=APIRouter(
     prefix="/userinfo",
@@ -28,6 +29,12 @@ def create_user(user:schemes.UserCreate,db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+@router.get("/me", response_model=schemes.UserOut)
+def get_current_user_info(
+    current_user: models.User = Depends(get_current_user)
+):
+    return current_user
 
 @router.get('/{id}',response_model=schemes.UserOut)
 def get_user(id:int,db: Session = Depends(get_db)):
