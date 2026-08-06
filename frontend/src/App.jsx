@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import ProtectedRoute from './components/protectedroute/Protectedroute.jsx'
 import Feature from './components/feature/Feature.jsx'
 import Aboutus from './components/aboutus/aboutus.jsx'
+import Profile from "./components/Dashboard/profile/profile.jsx";
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
   const [showSignup, setShowSignup] = useState(false)
@@ -57,9 +58,18 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-  
-      </Routes>
-  
+         <Route
+    path="/profile"
+    element={
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    }
+  />
+
+</Routes>
+      
+      
     </>
   )
 }
