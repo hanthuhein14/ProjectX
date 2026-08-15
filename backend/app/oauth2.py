@@ -38,6 +38,23 @@ def verify_access_token(token:str,credentials_exception):
     except jwt.PyJWTError:
         raise credentials_exception
     return token_data
+
+def verify_admin_access_token(token:str,credentials_exception):
+    try:
+        payload=jwt.decode(token,SECRET_KEY,algorithms=[ALGORITHM])
+
+        is_admin=payload.get("is_admin")
+
+        if is_admin is not True:
+            raise credentials_exception
+    except jwt.PyJWTError:
+        raise credentials_exception
+    return payload
+
+def get_current_admin(token:str=Depends(oauth2_scheme)):
+    credentials_exception=HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=f"Could not validate admin credentials",headers={"WWW-Authenticate":"Bearer"})
+
+    return verify_admin_access_token(token, credentials_exception)
     
 def get_current_user(token:str=Depends(oauth2_scheme),db: Session = Depends(database.get_db)):
     credentials_exception=HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=f"Could not validate credentials",headers={"WWW-Authenticate":"Bearer"})

@@ -1,0 +1,283 @@
+.transaction-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  color: #111827;
+  padding: 32px;
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  max-width: 1120px;
+  margin: 0 auto 24px;
+}
+
+.transaction-header p {
+  color: #0f766e;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.transaction-header h1 {
+  font-size: 36px;
+  line-height: 1.15;
+  margin-top: 8px;
+}
+
+.transaction-header button,
+.transaction-form button {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 12px 16px;
+}
+
+.transaction-header button {
+  background: #111827;
+  color: #ffffff;
+}
+
+.transaction-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 22px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.transaction-plan,
+.transaction-form {
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 16px 38px rgba(15, 23, 42, 0.08);
+}
+
+.transaction-plan img,
+.transaction-placeholder {
+  width: 100%;
+  height: 360px;
+}
+
+.transaction-plan img {
+  display: block;
+  object-fit: cover;
+}
+
+.transaction-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f766e, #f59e0b);
+  color: #ffffff;
+  font-size: 96px;
+  font-weight: 800;
+}
+
+.transaction-plan-body {
+  padding: 22px;
+}
+
+.transaction-plan-body h2 {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.transaction-plan-body p,
+.transaction-plan-body span,
+.transaction-message {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.transaction-rating-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.transaction-rating-summary strong,
+.transaction-rating-summary span {
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  border-radius: 8px;
+  color: #0f766e;
+  font-size: 14px;
+  font-weight: 800;
+  margin-top: 0;
+  padding: 6px 10px;
+}
+
+.transaction-rate-box {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.transaction-rate-box p {
+  color: #475569;
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.transaction-stars {
+  display: flex;
+  gap: 6px;
+}
+
+.transaction-stars button {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 21px;
+  line-height: 1;
+  padding: 0;
+}
+
+.transaction-stars button.active {
+  border-color: #f59e0b;
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.transaction-stars button:disabled {
+  background: #f1f5f9;
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.transaction-rating-message {
+  display: block;
+  color: #0f766e !important;
+  font-size: 14px !important;
+  font-weight: 800;
+  margin-top: 10px !important;
+}
+
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px;
+}
+
+.transaction-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.transaction-form input,
+.transaction-form select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 15px;
+  outline: none;
+  padding: 12px 14px;
+}
+
+.transaction-preview {
+  width: 100%;
+  height: 190px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.transaction-voucher {
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 16px;
+}
+
+.transaction-voucher h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.transaction-voucher div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: #475569;
+  font-size: 15px;
+  padding: 8px 0;
+}
+
+.transaction-voucher strong {
+  color: #111827;
+}
+
+.transaction-total {
+  border-top: 1px solid #cbd5e1;
+  margin-top: 8px;
+  padding-top: 14px !important;
+}
+
+.transaction-total strong {
+  color: #0f766e;
+  font-size: 20px;
+}
+
+.transaction-error {
+  border: 1px solid rgba(185, 28, 28, 0.24);
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px;
+}
+
+.transaction-form button {
+  background: #0f766e;
+  color: #ffffff;
+}
+
+.transaction-form button:disabled {
+  background: #cbd5e1;
+  color: #475569;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .transaction-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .transaction-page {
+    padding: 20px;
+  }
+
+  .transaction-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .transaction-plan img,
+  .transaction-placeholder {
+    height: 260px;
+  }
+}

@@ -38,8 +38,10 @@ const Profile = () => {
     } catch (error) {
       console.error("GET USER ERROR:", error);
 
-      localStorage.removeItem("token");
-      navigate("/");
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        localStorage.removeItem("token");
+        navigate("/");
+      }
     }
   };
 

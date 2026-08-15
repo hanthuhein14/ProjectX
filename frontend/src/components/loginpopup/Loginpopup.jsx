@@ -3,6 +3,9 @@ import './Loginpopup.css'
 import {useNavigate} from 'react-router-dom'
 import api from "../../api/axios";
 
+const ADMIN_EMAIL = "admin@gmail.com";
+const ADMIN_PASSWORD = "admin123";
+
 const Loginpopup = ({ setShowLogin,setShowSignup }) => {
   const navigate=useNavigate();
 
@@ -11,11 +14,31 @@ const Loginpopup = ({ setShowLogin,setShowSignup }) => {
 
   const handleLogin=async(e)=>{
     e.preventDefault();
+
+    const loginEmail = email.trim().toLowerCase();
+
     try{
+      if (loginEmail === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        const response = await api.post("/admin/login", {
+          email: loginEmail,
+          password: password
+        });
+
+        localStorage.removeItem("token");
+        localStorage.setItem(
+          "adminToken",
+          response.data.access_token
+        );
+        setShowLogin(false);
+        navigate("/admin");
+        return;
+      }
+
       const response=await api.post("/login",{
-        email:email,
+        email:loginEmail,
         password:password
       });
+      localStorage.removeItem("adminToken");
       localStorage.setItem(
         "token",
         response.data.access_token

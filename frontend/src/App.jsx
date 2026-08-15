@@ -10,6 +10,12 @@ import ProtectedRoute from './components/protectedroute/Protectedroute.jsx'
 import Feature from './components/feature/Feature.jsx'
 import Aboutus from './components/aboutus/aboutus.jsx'
 import Profile from "./components/Dashboard/profile/profile.jsx";
+import PopularDestination from './components/Populardistination/pd.jsx'
+import Contact from './components/contact/contact.jsx'
+import AdminDashboard from './components/Admin/AdminDashboard.jsx'
+import AdminProtectedRoute from './components/protectedroute/AdminProtectedRoute.jsx'
+import BookingStatus from './components/BookingStatus/BookingStatus.jsx'
+import Transaction from './components/Transaction/Transaction.jsx'
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
   const [showSignup, setShowSignup] = useState(false)
@@ -43,8 +49,10 @@ const App = () => {
                 setShowSignup={setShowSignup}
               />
               <Home />
+              <PopularDestination setShowLogin={setShowLogin}/>
               <Feature/>
               <Aboutus/>
+              <Contact setShowLogin={setShowLogin}/>
             </div>
           }
         />
@@ -66,6 +74,33 @@ const App = () => {
       </ProtectedRoute>
     }
   />
+
+        <Route
+          path="/admin"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboard />
+            </AdminProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/booking-status"
+          element={
+            <ProtectedRoute>
+              <BookingStatus />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/transaction/:planId"
+          element={
+            <ProtectedRoute>
+              <Transaction />
+            </ProtectedRoute>
+          }
+        />
 
 </Routes>
       
