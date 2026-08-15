@@ -1,0 +1,12 @@
+annotated-types
+bcrypt
+email-validator
+fastapi
+passlib
+psycopg[binary]
+pydantic
+pydantic-settings
+PyJWT
+python-multipart
+SQLAlchemy
+uvicorn[standard]
