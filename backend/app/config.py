@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     secret_key:str
     algorithm:str
     access_token_expire_minutes:int
+    cors_origins:str = "http://localhost:5173,https://projectx71.vercel.app"
 
     class Config:
         env_file = ".env"

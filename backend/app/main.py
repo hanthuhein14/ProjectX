@@ -6,6 +6,7 @@ from . database import engine
 from sqlalchemy import text
 from fastapi.staticfiles import StaticFiles
 import os
+from .config import settings
 
 UPLOAD_DIR = "uploads/profile"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -26,7 +27,9 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173"
+        origin.strip()
+        for origin in settings.cors_origins.split(",")
+        if origin.strip()
     ],
     allow_credentials=True,
     allow_methods=["*"],
