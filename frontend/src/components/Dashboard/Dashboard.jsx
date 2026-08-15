@@ -4,7 +4,7 @@ import api from "../../api/axios";
 import React, { useEffect, useState } from "react";
 import { assets } from "../../assets/assets";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const getPlanPhotoUrl = (photo) => {
   if (!photo) {

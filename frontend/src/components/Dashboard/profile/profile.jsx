@@ -196,7 +196,7 @@ const Profile = () => {
   // =========================
 
   const profilePhotoUrl = user.profile_photo
-    ? `http://127.0.0.1:8000/uploads/profile/${user.profile_photo}`
+    ? `${import.meta.env.VITE_API_URL}/uploads/profile/${user.profile_photo}`
     : null;
 
 
