@@ -1,5 +1,4 @@
 import os
-import uuid
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from sqlalchemy import func
@@ -8,6 +7,7 @@ from sqlalchemy.orm import Session
 from .. import models, oauth2, schemes
 from ..database import get_db
 from ..oauth2 import get_current_user
+from ..storage import save_image_upload
 
 
 router = APIRouter(
@@ -259,35 +259,11 @@ async def upload_plan_photo(
     plan_photo: UploadFile = File(...),
     admin=Depends(oauth2.get_current_admin)
 ):
-    if not plan_photo.content_type:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="File type not detected"
-        )
-
-    if not plan_photo.content_type.startswith("image/"):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Only image files are allowed"
-        )
-
-    extension = os.path.splitext(
-        plan_photo.filename
-    )[1].lower()
-
-    if not extension:
-        extension = ".jpg"
-
-    filename = f"{uuid.uuid4()}{extension}"
-    file_path = os.path.join(
-        UPLOAD_DIR,
-        filename
+    filename = await save_image_upload(
+        file=plan_photo,
+        folder="plans",
+        local_directory=UPLOAD_DIR
     )
-
-    contents = await plan_photo.read()
-
-    with open(file_path, "wb") as buffer:
-        buffer.write(contents)
 
     return {
         "filename": filename

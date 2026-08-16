@@ -1,6 +1,5 @@
 
 import os
-import uuid
 
 from app import models, schemes, utils
 
@@ -18,6 +17,7 @@ from fastapi import (
 
 from ..database import get_db
 from ..oauth2 import get_current_user
+from ..storage import remove_local_file, save_image_upload, validate_image_upload
 
 
 router = APIRouter(
@@ -158,70 +158,22 @@ async def update_user(
         print("Original filename:", profile_photo.filename)
         print("Content type:", profile_photo.content_type)
 
-
-        # Check image type
-
-        if not profile_photo.content_type:
-            raise HTTPException(
-                status_code=400,
-                detail="File type not detected"
-            )
-
-        if not profile_photo.content_type.startswith("image/"):
-            raise HTTPException(
-                status_code=400,
-                detail="Only image files are allowed"
-            )
-
-
-        # Get extension
-
-        extension = os.path.splitext(
-            profile_photo.filename
-        )[1].lower()
-
-        if not extension:
-            extension = ".jpg"
-
-
-        # Generate unique filename
-
-        filename = f"{uuid.uuid4()}{extension}"
-
-        print("New filename:", filename)
-
-
-        # File path
-
-        file_path = os.path.join(
-            UPLOAD_DIR,
-            filename
+        validate_image_upload(profile_photo)
+        filename = await save_image_upload(
+            file=profile_photo,
+            folder="profile",
+            local_directory=UPLOAD_DIR
         )
 
-        print("File path:", file_path)
-
-
-        # Save image
-
-        contents = await profile_photo.read()
-
-        with open(file_path, "wb") as buffer:
-            buffer.write(contents)
-
-        print("Image saved successfully")
-
+        print("New filename:", filename)
 
         # Delete old image
 
         if current_user.profile_photo:
-
-            old_file = os.path.join(
+            remove_local_file(
                 UPLOAD_DIR,
                 current_user.profile_photo
             )
-
-            if os.path.exists(old_file):
-                os.remove(old_file)
 
 
         # =========================

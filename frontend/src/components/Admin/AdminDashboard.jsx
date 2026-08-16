@@ -55,7 +55,17 @@ const getPaymentScreenshotUrl = (screenshot) => {
     return screenshot;
   }
 
-  return `${API_BASE_URL}/uploads/payment/${screenshot}`;
+  const cleanScreenshot = screenshot.replaceAll("\\", "/");
+
+  if (cleanScreenshot.startsWith("/uploads/")) {
+    return `${API_BASE_URL}${cleanScreenshot}`;
+  }
+
+  if (cleanScreenshot.startsWith("uploads/")) {
+    return `${API_BASE_URL}/${cleanScreenshot}`;
+  }
+
+  return `${API_BASE_URL}/uploads/payment/${cleanScreenshot}`;
 };
 
 const UsageChart = ({ points }) => {

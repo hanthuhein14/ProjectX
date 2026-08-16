@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     algorithm:str
     access_token_expire_minutes:int
     cors_origins:str = "http://localhost:5173,https://projectx71.vercel.app"
+    supabase_url: str | None = None
+    supabase_service_role_key: str | None = None
+    supabase_storage_bucket: str | None = None
 
     class Config:
         env_file = ".env"

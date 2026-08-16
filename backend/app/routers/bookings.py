@@ -1,5 +1,4 @@
 import os
-import uuid
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
@@ -7,6 +6,7 @@ from sqlalchemy.orm import Session
 from .. import models, schemes
 from ..database import get_db
 from ..oauth2 import get_current_user
+from ..storage import save_image_upload, validate_image_upload
 
 
 router = APIRouter(
@@ -48,17 +48,10 @@ async def request_booking(
             detail="Invalid payment method"
         )
 
-    if not payment_screenshot.content_type:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Payment screenshot file type not detected"
-        )
-
-    if not payment_screenshot.content_type.startswith("image/"):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Payment screenshot must be an image"
-        )
+    validate_image_upload(
+        payment_screenshot,
+        "Payment screenshot"
+    )
 
     plan = db.query(
         models.Plan
@@ -92,23 +85,11 @@ async def request_booking(
             detail="You already have a pending request for this plan"
         )
 
-    extension = os.path.splitext(
-        payment_screenshot.filename
-    )[1].lower()
-
-    if not extension:
-        extension = ".jpg"
-
-    screenshot_filename = f"{uuid.uuid4()}{extension}"
-    screenshot_path = os.path.join(
-        PAYMENT_UPLOAD_DIR,
-        screenshot_filename
+    screenshot_filename = await save_image_upload(
+        file=payment_screenshot,
+        folder="payment",
+        local_directory=PAYMENT_UPLOAD_DIR
     )
-
-    contents = await payment_screenshot.read()
-
-    with open(screenshot_path, "wb") as buffer:
-        buffer.write(contents)
 
     booking = models.Booking(
         user_id=current_user.id,

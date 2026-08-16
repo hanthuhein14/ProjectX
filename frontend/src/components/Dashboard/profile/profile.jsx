@@ -4,6 +4,30 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import React, { useEffect, useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+const getProfilePhotoUrl = (photo) => {
+  if (!photo) {
+    return null;
+  }
+
+  if (photo.startsWith("http://") || photo.startsWith("https://")) {
+    return photo;
+  }
+
+  const cleanPhoto = photo.replaceAll("\\", "/");
+
+  if (cleanPhoto.startsWith("/uploads/")) {
+    return `${API_BASE_URL}${cleanPhoto}`;
+  }
+
+  if (cleanPhoto.startsWith("uploads/")) {
+    return `${API_BASE_URL}/${cleanPhoto}`;
+  }
+
+  return `${API_BASE_URL}/uploads/profile/${cleanPhoto}`;
+};
+
 const Profile = () => {
   const navigate = useNavigate();
 
@@ -195,9 +219,7 @@ const Profile = () => {
   // PROFILE PHOTO URL
   // =========================
 
-  const profilePhotoUrl = user.profile_photo
-    ? `${import.meta.env.VITE_API_URL}/uploads/profile/${user.profile_photo}`
-    : null;
+  const profilePhotoUrl = getProfilePhotoUrl(user.profile_photo);
 
 
   // =========================
